@@ -28,8 +28,8 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let round = 0;
-    while(round < 5) {
+    let round = 1;
+    while(round <= 5) {
         const playerSelection = prompt('Enter your choice');
         const computerSelection = computerPlay();
         const result = playRound(playerSelection, computerSelection);
@@ -37,8 +37,7 @@ function game() {
         if (result !== 'Invalid input - try again!') {
             round++;
         }   
-    }
-    const result = playRound(playerSelection, computerSelection);
+        
     let playerScore = 0;
     let computerScore = 0;
     if (result === 'You win') { playerScore += 1};
@@ -51,6 +50,7 @@ function game() {
     else 
         { resultMessage = 'It was a tie!'};
     console.log(resultMessage);
+    }  
 }
 game();
 
