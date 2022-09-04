@@ -1,73 +1,61 @@
-function computerPlay() {
-    const items = ['rock', 'paper', 'scissors'];
-    const randomItem = items[Math.floor(Math.random() * items.length)];
-    return randomItem;
-}
-computerPlay();
-
-// function playRound(playerSelection, computerSelection) {
-//     const items = ['rock', 'paper', 'scissors'];
-//     if (playerSelection === computerSelection)
-//         return 'No Winner';
-//     if (computerSelection === 'rock' && playerSelection === 'scissors')
-//         return 'You loose! Rock beats Scissors';
-//     if (computerSelection === 'paper' && playerSelection === 'rock')
-//         return 'You loose! Paper beats Rock';
-//     if (computerSelection === 'scissors' && playerSelection === 'paper')
-//         return 'You loose! Scissors beats Paper';
-//     if (playerSelection === 'rock' && computerSelection === 'scissors')
-//         return 'You win! Rock beats Scissors';
-//     if (playerSelection === 'paper' && computerSelection === 'rock')
-//         return 'You win! Paper beats Rock';
-//     if (playerSelection === 'scissors' && computerSelection === 'paper')
-//         return 'You loose! Scissors beats Paper';
-// }
-function playRound(playerSelection, computerSelection) {
-    const items = ['rock', 'paper', 'scissors'];
-    if (playerSelection === computerSelection)
-        return 'No Winner';
-    if (computerSelection === 'rock' && playerSelection === 'scissors')
-        return 'You loose';
-    if (computerSelection === 'paper' && playerSelection === 'rock')
-        return 'You loose';
-    if (computerSelection === 'scissors' && playerSelection === 'paper')
-        return 'You loose';
-    if (playerSelection === 'rock' && computerSelection === 'scissors')
-        return 'You win';
-    if (playerSelection === 'paper' && computerSelection === 'rock')
-        return 'You win';
-    if (playerSelection === 'scissors' && computerSelection === 'paper')
-        return 'You loose';
-}
+const items = ['rock', 'paper', 'scissors'];
 const playerSelection1 = prompt('');
 const playerSelection = playerSelection1.toLocaleLowerCase();
 const computerSelection1 = computerPlay();
 const computerSelection = computerSelection1.toString();
 
-// console.log('computerPlay:',computerPlay());
-console.log('playerSelection:',playerSelection);
-console.log('computerSelection:', computerSelection);
-console.log(playRound(playerSelection, computerSelection));
-
-function result() {
-    let count;
-    if (playRound(playerSelection, computerSelection) === 'No Winner') count = 0;
-    if (playRound(playerSelection, computerSelection) === 'You win') count = 1;
-    if (playRound(playerSelection, computerSelection) === 'You loose') count = -1;
-    return count;
+function computerPlay() {
+    const randomItem = items[Math.floor(Math.random() * items.length)];
+    return randomItem;
 }
-console.log(result());
 
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection)
+        return 'No Winner';
+    else if (computerSelection === 'rock' && playerSelection === 'scissors')
+        return 'You loose';
+    else if (computerSelection === 'paper' && playerSelection === 'rock')
+        return 'You loose';
+    else if (computerSelection === 'scissors' && playerSelection === 'paper')
+        return 'You loose';
+    else if (playerSelection === 'rock' && computerSelection === 'scissors')
+        return 'You win';
+    else if (playerSelection === 'paper' && computerSelection === 'rock')
+        return 'You win';
+    else if (playerSelection === 'scissors' && computerSelection === 'paper')
+        return 'You loose';
+    return 'Invalid input - try again!'
+}
 
 function game() {
-    let A = [];
-    let score = result();
-    for (let i = 1; i <= 5; i++){
-        console.log( 'round:', i, 'result:', result());
-        A.push(score);
-    } 
-    return A;
-    console.log(A);
+    let round = 0;
+    while(round < 5) {
+        const playerSelection = prompt('Enter your choice');
+        const computerSelection = computerPlay();
+        const result = playRound(playerSelection, computerSelection);
+        console.log(`result ${round}:`, result);
+        if (result !== 'Invalid input - try again!') {
+            round++;
+        }   
+    }
+    const result = playRound(playerSelection, computerSelection);
+    let playerScore = 0;
+    let computerScore = 0;
+    if (result === 'You win') { playerScore += 1};
+    if (result === 'You loose') { computerScore += 1};
+    // let resultMessage = (playerScore > computerScore) ? 'You won the game!' : 'Computer won the game!';
+    if (playerScore > computerScore) 
+        {resultMessage = `You won the game! Player score: ${playerScore}, Computer score: ${computerScore}`}
+    else if (playerScore < computerScore) 
+        {resultMessage = `Computer won the game! Player score: ${playerScore}, Computer score: ${computerScore}`}
+    else 
+        { resultMessage = 'It was a tie!'};
+    console.log(resultMessage);
 }
-console.log(game());
+game();
+
+
+
+
+
 
